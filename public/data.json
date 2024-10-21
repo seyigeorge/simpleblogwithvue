@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Top 10 Must-Watch Movies for the Festive Season",
+    "author": "Admin",
+    "content": "The holiday season is upon us, bringing with it cozy nights perfect for family bonding and making memories. After a very busy year full of different activities, the Christmas holiday period is often the time families spend more time together under one roof. It is also the best time to watch some classic Christmas movies with loved ones. In this report, PUNCH Online highlights thirteen (13) must-watch films to make your festive season merry and memorable. The list of classic Christmas movies are mixture of evergreen tales, romance, and even horror genres to give you and your family memories to keep. Home Alone (1990): This slapstick classic comedy about a mischievous eight-year-old who defends his home from burglars during Christmas break is an absolute classic. Macaulay Culkin’s iconic performance and the hilarious traps he sets to make this a laugh-out-loud favourite for the whole family.",
+    "image": "/images/blog1.jpg",
+    "excerpt": "The holiday season is upon us, bringing with it cozy nights."
+
+  },
+  {
+    "id": 2,
+    "title": "How 2024 shaped us as a country",
+    "author": "Admin",
+    "content": "2024 will be a year of ballots and bullets, a stress test both for the democratic system and for the multiple conflicts stoking global instability. We still face a world in disarray, in upheaval and in dispute. This time, however, any analysis hangs on the huge question mark of the intense series of elections that will shape the coming year. With all-out hostilities in Ukraine, Palestine, Sudan or Yemen, we are seeing the most active conflicts of any time since the end of the Second World War. How the various armed conflicts and the outcome of the more than 70 elections marked on the calendar impact one another will set the geopolitical agenda for the coming months.",
+    "image": "/images/blog2.jpg",
+    "excerpt": "2024 will be a year of ballots and bullets."
+
+  },
+  {
+    "id": 3,
+    "title": "The Most Memorable Moments in 2024 Sports – A Year in Review",
+    "author": "Seyi",
+    "content": "Paris Olympics 2024, the international multi-sport games, started on July 26 after a grand opening ceremony. The game is scheduled to end on August 12. Here are some iconic moments from the two-week long sports event: Brazilian gymnast, Rebecca Andrade won gold medal in Paris Olympics 2024. As she climbed the podium wit her medal, her competitors Simon Biles and Jordan Chiles, who won silver and bronze respectively, bow down on either side as a mark of respect.",
+    "image": "/images/blog3.jpg",
+    "excerpt": "Paris Olympics 2024, the international multi-sport games."
+
+  }
+]
