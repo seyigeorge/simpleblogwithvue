@@ -57,6 +57,10 @@
             >
               Read More
             </router-link>
+            <!-- Delete button
+            <button @click="deletePost(index)" class="mt-2 bg-red-500 text-white px-4 py-2">
+              Delete
+            </button> -->
           </div>
         </div>
       </section>
@@ -96,6 +100,11 @@ export default defineComponent({
     const featuredPosts = computed(() =>
       postStore.posts.slice(0, 3) 
     );
+
+    // Delete post from store
+    // const deletePost = (index: number) => {
+    //   postStore.posts.splice(index, 1); // Update the store by removing the post from the array
+    // };
 
     return {
       searchQuery,

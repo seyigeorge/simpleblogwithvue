@@ -90,7 +90,7 @@ export default defineComponent({
         title: title.value,
         author: author.value,
         content: content.value,
-        image: '/images/default.jpg', // Default image
+        image: '/images/default.jpg',
         excerpt: content.value.substring(0, 100) + '...', // Generate excerpt
       };
 
@@ -156,23 +156,23 @@ label {
 }
 
 button {
-  background-color: #4a90e2; /* Button background color */
+  background-color: #4a90e2; 
   color: white; /* Text color */
   padding: 10px 20px; /* Button padding */
   border-radius: 4px; /* Rounded corners */
-  border: none; /* Remove default border */
-  cursor: pointer; /* Pointer cursor on hover */
+  border: none; 
+  cursor: pointer;
   transition: background-color 0.3s, transform 0.3s; /* Transition effects */
 }
 
 button:hover {
-  background-color: #357ab8; /* Darker shade on hover */
-  transform: scale(1.05); /* Slightly scale up on hover */
+  background-color: #357ab8; 
+  transform: scale(1.05); 
 }
 
 .text-red-500 {
-  color: #f44336; /* Error text color */
-  margin-top: 5px; /* Space above error message */
-  font-size: 0.875rem; /* Smaller font size */
+  color: #f44336; 
+  margin-top: 5px; 
+  font-size: 0.875rem; 
 }
 </style>

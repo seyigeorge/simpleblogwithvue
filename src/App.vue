@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-100">
     <!-- Navbar -->
-    <header class="bg-blue-600 text-white p-4">
+    <header class="bg-black text-white p-4">
       <div class="container mx-auto flex justify-between items-center">
         <!-- Logo -->
         <h1 class="text-2xl font-bold">Simple Blog</h1>
@@ -26,26 +26,26 @@
 
         <!-- Desktop Menu -->
         <nav class="hidden lg:flex space-x-4">
-          <router-link to="/" class="hover:text-yellow-300">Home</router-link>
-          <router-link to="/add-post" class="hover:text-yellow-300">Add Post</router-link>
-          <a href="#" class="hover:text-yellow-300">Contact</a>
-          <a href="#" class="hover:text-yellow-300">Entertainment</a>
-          <a href="#" class="hover:text-yellow-300">Sport</a>
-          <a href="#" class="hover:text-yellow-300">Politics</a>
+          <router-link to="/" class="hover:text-gray-500">Home</router-link>
+          <router-link to="/add-post" class="hover:text-gray-500">Add Post</router-link>
+          <a href="#" class="hover:text-gray-500">Contact</a>
+          <a href="#" class="hover:text-gray-500">Entertainment</a>
+          <a href="#" class="hover:text-gray-500">Sport</a>
+          <a href="#" class="hover:text-gray-500">Politics</a>
         </nav>
       </div>
 
       <!-- Mobile Menu (shown when isMenuOpen is true) -->
       <nav
         v-if="isMenuOpen"
-        class="lg:hidden bg-blue-500 flex flex-col space-y-2 p-4"
+        class="lg:hidden bg-black flex flex-col space-y-2 p-4"
       >
-        <router-link to="/" class="hover:text-yellow-300">Home</router-link>
-        <router-link to="/add-post" class="hover:text-yellow-300">Add Post</router-link>
-        <a href="#" class="hover:text-yellow-300">Contact</a>
-        <a href="#" class="hover:text-yellow-300">Entertainment</a>
-        <a href="#" class="hover:text-yellow-300">Sport</a>
-        <a href="#" class="hover:text-yellow-300">Politics</a>
+        <router-link to="/" class="hover:text-gray-500">Home</router-link>
+        <router-link to="/add-post" class="hover:text-gray-500">Add Post</router-link>
+        <a href="#" class="hover:text-gray-500">Contact</a>
+        <a href="#" class="hover:text-gray-500">Entertainment</a>
+        <a href="#" class="hover:text-gray-500">Sport</a>
+        <a href="#" class="hover:text-gray-500">Politics</a>
       </nav>
     </header>
 
@@ -55,7 +55,7 @@
       <router-view />
     </main>
 
-    <footer class="bg-gray-800 text-white text-center p-4">
+    <footer class="bg-black text-white text-center p-4">
       <p>© 2024 Simple Blog. All rights reserved.</p>
     </footer>
   </div>
@@ -73,5 +73,3 @@ export default defineComponent({
   },
 });
 </script>
-
-
