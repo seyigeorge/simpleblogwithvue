@@ -96,6 +96,10 @@ export default defineComponent({
 
       postStore.addPost(newPost); // Add post to the store
 
+      // Save posts to local storage
+      localStorage.setItem('posts', JSON.stringify(postStore.posts));
+
+
       // Show success notification
       toast.success('Successfully created blog post!');
 

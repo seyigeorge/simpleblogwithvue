@@ -84,9 +84,19 @@ export default defineComponent({
     const postStore = usePostStore();
     const searchQuery = ref(''); // Search query
 
-    onMounted(async () => {
-      await postStore.fetchPosts();
+    onMounted(() => {
+      const storedPosts = localStorage.getItem('posts');
+      if (storedPosts) {
+        postStore.posts = JSON.parse(storedPosts); // Load posts from local storage
+      } else {
+        postStore.fetchPosts(); // Fallback: Fetch posts from an API or predefined data
+      }
     });
+
+
+    // onMounted(async () => {
+    //   await postStore.fetchPosts();
+    // });
 
     // Filter posts by title or author
     const filteredPosts = computed(() => {
