@@ -40,6 +40,22 @@
         <span v-if="contentError" class="text-red-500">{{ contentError }}</span>
       </div>
 
+      <!-- Image Upload Input -->
+      <div class="mb-4">
+        <label for="image" class="block text-lg font-medium">Upload Image</label>
+        <input
+          type="file"
+          @change="onFileChange"
+          class="w-full border p-2 rounded"
+        />
+      </div>
+
+      <!-- Image Preview -->
+      <div v-if="image" class="mb-4">
+        <label class="block text-lg font-medium">Image Preview</label>
+        <img :src="image" alt="Image Preview" class="w-64 h-40 object-cover rounded-lg" />
+      </div>
+
       <!-- Submit Button -->
       <div class="flex justify-center">
         <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg">
@@ -52,7 +68,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { useRouter } from 'vue-router'; // Import router to navigate
+import { useRouter } from 'vue-router';
 import { usePostStore } from '../store/usePostStore';
 import { useToast } from 'vue-toastification';
 
@@ -62,14 +78,26 @@ export default defineComponent({
     const title = ref('');
     const author = ref('');
     const content = ref('');
+    const image = ref<string | null>(null); // Store image as a URL or base64 string
 
     const titleError = ref('');
     const authorError = ref('');
     const contentError = ref('');
 
     const postStore = usePostStore();
-    const router = useRouter(); // Router instance
+    const router = useRouter();
     const toast = useToast();
+
+    const onFileChange = (e: Event) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          image.value = event.target?.result as string;
+        };
+        reader.readAsDataURL(file);
+      }
+    };
 
     const submitPost = () => {
       titleError.value = '';
@@ -81,24 +109,39 @@ export default defineComponent({
       if (!author.value) authorError.value = 'Author is required';
       if (!content.value) contentError.value = 'Content is required';
 
-      // If there are validation errors, prevent submission
       if (titleError.value || authorError.value || contentError.value) return;
 
-      // Create a new post object
       const newPost = {
         id: Date.now(),
         title: title.value,
         author: author.value,
         content: content.value,
-        image: '/images/default.jpg',
-        excerpt: content.value.substring(0, 100) + '...', // Generate excerpt
+        image: image.value || '/images/default.jpg', // Use default if no image
+        excerpt: content.value.substring(0, 100) + '...',
       };
 
-      postStore.addPost(newPost); // Add post to the store
+      postStore.addPost(newPost);
 
-      // Save posts to local storage
-      localStorage.setItem('posts', JSON.stringify(postStore.posts));
+      // Create a minimal post object for local storage (without large base64 image data)
+      const minimalPosts = postStore.posts.map(post => ({
+        id: post.id,
+        title: post.title,
+        author: post.author,
+        content: post.content,
+        image: post.image,
+        excerpt: post.excerpt,
+      }));
 
+      try {
+        // Save minimal post data to local storage
+        localStorage.setItem('posts', JSON.stringify(minimalPosts));
+      } catch (e) {
+        if (e instanceof DOMException && e.name === 'QuotaExceededError') {
+          toast.error('Local storage quota exceeded. Could not save post.');
+        } else {
+          toast.error('An error occurred while saving the post.');
+        }
+      }
 
       // Show success notification
       toast.success('Successfully created blog post!');
@@ -107,6 +150,7 @@ export default defineComponent({
       title.value = '';
       author.value = '';
       content.value = '';
+      image.value = null;
 
       // Navigate to home page after submission
       router.push('/');
@@ -116,7 +160,9 @@ export default defineComponent({
       title,
       author,
       content,
+      image,
       submitPost,
+      onFileChange,
       titleError,
       authorError,
       contentError,
@@ -127,12 +173,12 @@ export default defineComponent({
 
 <style scoped>
 .add-post-page {
-  max-width: 600px; /* Limit the width of the form */
-  margin: 0 auto; /* Center the form */
+  max-width: 600px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #fff; /* Background color for the form */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 input[type="text"],
@@ -146,37 +192,37 @@ textarea {
 
 input[type="text"]:focus,
 textarea:focus {
-  border-color: #4a90e2; /* Change border color on focus */
-  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Shadow on focus */
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
 }
 
 .border-red-500 {
-  border-color: #f44336; /* Error border color */
-}
-
-label {
-  font-weight: bold; /* Make labels bold */
-  margin-bottom: 5px; /* Space between label and input */
+  border-color: #f44336;
 }
 
 button {
-  background-color: #4a90e2; 
-  color: white; /* Text color */
-  padding: 10px 20px; /* Button padding */
-  border-radius: 4px; /* Rounded corners */
-  border: none; 
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover {
-  background-color: #357ab8; 
-  transform: scale(1.05); 
+  background-color: #357ab8;
+  transform: scale(1.05);
 }
 
 .text-red-500 {
-  color: #f44336; 
-  margin-top: 5px; 
-  font-size: 0.875rem; 
+  color: #f44336;
+  margin-top: 5px;
+  font-size: 0.875rem;
+}
+
+img {
+  border-radius: 8px;
+  object-fit: cover;
 }
 </style>
